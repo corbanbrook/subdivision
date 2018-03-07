@@ -1,0 +1,12 @@
+@mixin column($fraction: 1, $offset: 0) {
+  flex-basis: calc(#{$fraction * 100}% - #{$subdivision-gutter});
+  max-width: calc(#{$fraction * 100}% - #{$subdivision-gutter});
+  
+  @include offset($offset);
+}
+
+@mixin offset($offset: 0) {
+  @if $offset > 0 {
+    margin-left: calc(#{$offset * 100}% + #{$subdivision-gutter / 2});
+  }
+}
