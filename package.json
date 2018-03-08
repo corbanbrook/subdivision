@@ -1,5 +1,7 @@
 {
   "private": true,
+  "license": "MIT",
+  "repository": "git@github.com:corbanbrook/subdivision.git",
   "workspaces": [
     "packages/*"
   ],
