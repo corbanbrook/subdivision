@@ -1,0 +1,51 @@
+/* Config */
+
+// Gutter - Can be fixed or relative unit
+$subdivision-gutter = 10px;
+$subdivision-h-gutter = $subdivision-gutter;
+$subdivision-v-gutter = $subdivision-gutter;
+
+// Selectors
+$subdivision-container-selector = ".container";
+$subdivision-column-selector = "div";
+
+
+/* Mixins */
+column($fraction: 1, $offset: 0) {
+  flex-basis: calc({$fraction * 100}% - {$subdivision-h-gutter});
+  max-width: calc({$fraction * 100}% - {$subdivision-h-gutter});
+  
+  +offset($offset);
+}
+
+offset($offset) {
+  @if type-of($offset) == "string" {
+    margin-left: $offset;
+  } @else if type-of($offset) == "number" {
+    @if unitless($offset) {
+      @if $offset != 0 {
+        margin-left: calc({$offset * 100}% + {$subdivision-h-gutter / 2});
+      }
+    } @else {
+      margin-left: $offset;
+    }
+  }
+}
+
+
+/* Classes */
+{$subdivision-container-selector} {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 (-$subdivision-h-gutter / 2);
+  box-sizing: border-box;
+
+  > {$subdivision-column-selector} {
+    margin: 0 ($subdivision-h-gutter / 2) $subdivision-v-gutter;
+    flex: 1 1 0%;
+
+    > {$subdivision-container-selector} {
+      margin-bottom: -$subdivision-v-gutter;
+    }
+  }
+}
