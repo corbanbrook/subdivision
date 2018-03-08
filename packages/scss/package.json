@@ -1,12 +1,11 @@
 {
   "name": "@subdivision/scss",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "repository": "git@github.com:corbanbrook/subdivision.git",
   "files": [
     "src"
   ],
   "main": "index.js",
-  "author": "Corban Riley",
-  "license": "MIT"
+  "author": "Corban Riley"
 }
