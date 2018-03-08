@@ -1,8 +1,11 @@
 {
-  "name": "@subdivision/scss",
+  "name": "subdivision-scss",
   "version": "0.1.3",
   "license": "MIT",
-  "repository": "git@github.com:corbanbrook/subdivision.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/corbanbrook/subdivision.git"
+  },
   "files": [
     "src"
   ],
@@ -10,5 +13,13 @@
   "author": "Corban Riley",
   "devDependencies": {
     "node-sass": "^4.7.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/corbanbrook/subdivision/issues"
+  },
+  "homepage": "https://github.com/corbanbrook/subdivision#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "description": ""
 }
