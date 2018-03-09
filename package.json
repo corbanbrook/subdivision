@@ -5,8 +5,16 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "build:example": "./node_modules/gulp/bin/gulp.js build:examples"
+  },
   "devDependencies": {
-    "lerna": "^2.9.0"
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.3.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sequence": "^1.0.0",
+    "gulp-stylus": "^2.7.0",
+    "indent-string": "^3.2.0",
+    "lerna": "^2.8.0"
   }
 }
-

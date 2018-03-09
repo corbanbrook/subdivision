@@ -1,0 +1,29 @@
+.container, .container * {
+  background: rgba(236,118,118,.3);
+  box-sizing: border-box;
+}
+
+html, body {
+  background: #FFF;
+  margin: 0;
+  padding: 0;
+  font-family: 'Karma', serif;
+}
+
+.demo-wrapper {
+  max-width: 1240px;
+  margin: 0 auto;
+  border-left: #6ae3ff 3px solid;
+  border-right: #6ae3ff 3px solid;
+}
+
+.container > div {
+  cursor: pointer;
+  text-align: center;
+  padding: 5px;
+  transition: background 150ms ease;
+}
+
+.container > div:hover {
+  background: rgba(236,118,118,.5);
+}
