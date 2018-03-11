@@ -1,4 +1,4 @@
-/* Config */
+/* Subdivision */
 
 // Gutter - Can be fixed or relative unit
 $subdivision-gutter: 10px !default;
@@ -6,8 +6,8 @@ $subdivision-h-gutter: $subdivision-gutter !default;
 $subdivision-v-gutter: $subdivision-gutter !default;
 
 // Selectors
-$subdivision-container-selector: ".container" !default;
-$subdivision-column-selector: "div" !default;
+$subdivision-container-selector: ".grid" !default;
+$subdivision-column-selector: "*" !default;
 
 
 /* Mixins */
@@ -18,14 +18,19 @@ $subdivision-column-selector: "div" !default;
   @include offset($offset);
 }
 
+@mixin span($fraction: 1, $offset: 0) {
+  flex-basis: calc(#{percentage($fraction)});
+  max-width: calc(#{percentage($fraction)});
+  
+  @include offset($offset);
+}
+
 @mixin offset($offset: 0) {
   @if type-of($offset) == "number" {
     @if unitless($offset) {
-      @if $offset != 0 {
-        margin-left: calc(#{percentage($offset)} + #{$subdivision-h-gutter / 2});
-      }
+      margin-left: percentage($offset);
     } @else {
-      margin-left: calc(#{$subdivision-h-gutter / 2} + #{$offset});
+      margin-left: $offset;
     }
   } @else if type-of($offset) == "string" {
     margin-left: $offset;
@@ -38,20 +43,39 @@ $subdivision-column-selector: "div" !default;
   margin-left: 0; // Remove offset
 }
 
+@mixin center($fraction) {
+  width: percentage($fraction);
+}
 
 /* Classes */
 #{$subdivision-container-selector} {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 (-$subdivision-h-gutter / 2);
   box-sizing: border-box;
 
+  margin-right: -$subdivision-h-gutter;
+
   > #{$subdivision-column-selector} {
-    margin: 0 ($subdivision-h-gutter / 2) $subdivision-v-gutter;
     flex: 1 1 0%;
+    box-sizing: border-box;
+
+    margin-right: $subdivision-h-gutter;
+    margin-bottom: $subdivision-v-gutter;
 
     > #{$subdivision-container-selector} {
       margin-bottom: -$subdivision-v-gutter;
+    }
+  }
+
+  &.spans {
+    margin-right: 0;
+
+    > #{$subdivision-column-selector} {
+      margin-right: 0;
+
+      > #{$subdivision-container-selector}.spans {
+        margin-bottom: 0;
+      }
     }
   }
 }
