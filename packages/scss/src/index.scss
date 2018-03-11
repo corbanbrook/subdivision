@@ -1,13 +1,13 @@
 /* Config */
 
 // Gutter - Can be fixed or relative unit
-$subdivision-gutter: 10px;
-$subdivision-h-gutter: $subdivision-gutter;
-$subdivision-v-gutter: $subdivision-gutter;
+$subdivision-gutter: 10px !default;
+$subdivision-h-gutter: $subdivision-gutter !default;
+$subdivision-v-gutter: $subdivision-gutter !default;
 
 // Selectors
-$subdivision-container-selector: ".container";
-$subdivision-column-selector: "div";
+$subdivision-container-selector: ".container" !default;
+$subdivision-column-selector: "div" !default;
 
 
 /* Mixins */
