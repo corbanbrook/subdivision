@@ -12,8 +12,8 @@ $subdivision-column-selector: "div" !default;
 
 /* Mixins */
 @mixin column($fraction: 1, $offset: 0) {
-  flex-basis: calc(#{$fraction * 100}% - #{$subdivision-h-gutter});
-  max-width: calc(#{$fraction * 100}% - #{$subdivision-h-gutter});
+  flex-basis: calc(#{percentage($fraction)} - #{$subdivision-h-gutter});
+  max-width: calc(#{percentage($fraction)} - #{$subdivision-h-gutter});
   
   @include offset($offset);
 }
@@ -24,7 +24,7 @@ $subdivision-column-selector: "div" !default;
   } @else if type-of($offset) == "number" {
     @if unitless($offset) {
       @if $offset != 0 {
-        margin-left: calc(#{$offset * 100}% + #{$subdivision-h-gutter / 2});
+        margin-left: calc(#{percentage($offset)} + #{$subdivision-h-gutter / 2});
       }
     } @else {
       margin-left: $offset;
