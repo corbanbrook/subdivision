@@ -32,6 +32,12 @@ $subdivision-column-selector: "div" !default;
   }
 }
 
+@mixin stack() {
+  flex-basis: calc(100% - #{$subdivision-h-gutter});
+  max-width: calc(100% - #{$subdivision-h-gutter});
+  margin-left: 0; // Remove offset
+}
+
 
 /* Classes */
 #{$subdivision-container-selector} {
