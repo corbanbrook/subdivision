@@ -44,7 +44,8 @@ $subdivision-column-selector: "*" !default;
 }
 
 @mixin center($fraction) {
-  width: percentage($fraction);
+  max-width: calc((100% - #{$subdivision-h-gutter}) * #{$fraction} - #{$subdivision-h-gutter});
+  margin: 0 auto;
 }
 
 /* Classes */
