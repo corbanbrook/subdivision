@@ -11,11 +11,16 @@ $subdivision-column-selector: "*" !default;
 
 
 /* Mixins */
-@mixin column($fraction: 1, $offset: 0) {
-  flex-basis: calc(#{percentage($fraction)} - #{$subdivision-h-gutter});
-  max-width: calc(#{percentage($fraction)} - #{$subdivision-h-gutter});
+@mixin column($fraction: 1, $offset: 0, $gutter-left: $subdivision-h-gutter, $gutter-right: $subdivision-h-gutter) {
+  $gutter-width: ($gutter-left + $gutter-right) - $subdivision-h-gutter;
   
-  @include offset($offset);
+  flex-basis: calc(#{percentage($fraction)} - #{$gutter-width});
+  max-width: calc(#{percentage($fraction)} - #{$gutter-width});
+  
+  margin-right: $gutter-right - $subdivision-h-gutter;
+  margin-left: $gutter-left;
+
+  @include offset($offset, $gutter-left);
 }
 
 @mixin span($fraction: 1, $offset: 0) {
@@ -25,22 +30,24 @@ $subdivision-column-selector: "*" !default;
   @include offset($offset);
 }
 
-@mixin offset($offset: 0) {
-  @if type-of($offset) == "number" {
-    @if unitless($offset) {
-      margin-left: percentage($offset);
-    } @else {
+@mixin offset($offset: 0, $gutter: $subdivision-h-gutter) {
+  @if $offset != 0 {
+    @if type-of($offset) == "number" {
+      @if unitless($offset) {
+        margin-left: calc(#{percentage($offset)} + #{$gutter});
+      } @else {
+        margin-left: calc(#{$offset} + #{$gutter});
+      }
+    } @else if type-of($offset) == "string" {
       margin-left: $offset;
     }
-  } @else if type-of($offset) == "string" {
-    margin-left: $offset;
   }
 }
 
 @mixin stack() {
   flex-basis: calc(100% - #{$subdivision-h-gutter});
   max-width: calc(100% - #{$subdivision-h-gutter});
-  margin-left: 0; // Remove offset
+  margin-left: $subdivision-h-gutter; // Return to default offset
 }
 
 @mixin center($fraction) {
@@ -54,29 +61,19 @@ $subdivision-column-selector: "*" !default;
   flex-wrap: wrap;
   box-sizing: border-box;
 
+  margin-left: -$subdivision-h-gutter;
   margin-right: -$subdivision-h-gutter;
-
+  padding-right: $subdivision-h-gutter;
+  
   > #{$subdivision-column-selector} {
     flex: 1 1 0%;
     box-sizing: border-box;
 
-    margin-right: $subdivision-h-gutter;
+    margin-left: $subdivision-h-gutter;
     margin-bottom: $subdivision-v-gutter;
 
     > #{$subdivision-container-selector} {
       margin-bottom: -$subdivision-v-gutter;
-    }
-  }
-
-  &.spans {
-    margin-right: 0;
-
-    > #{$subdivision-column-selector} {
-      margin-right: 0;
-
-      > #{$subdivision-container-selector}.spans {
-        margin-bottom: 0;
-      }
     }
   }
 }
