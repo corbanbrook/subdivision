@@ -10,8 +10,20 @@ $subdivision-container-selector: ".grid" !default;
 $subdivision-column-selector: "*" !default;
 
 
+@function getOffset($offset: 0, $gutter: $subdivision-h-gutter) {
+  @if type-of($offset) == "number" {
+    @if unitless($offset) {
+      @return calc(#{percentage($offset)} + #{$gutter});
+    } @else {
+      @return calc(#{$offset} + #{$gutter});
+    }
+  } @else if type-of($offset) == "string" {
+    @return $offset;
+  }
+}
+
 /* Mixins */
-@mixin column($fraction: 1, $offset: 0, $gutter-left: $subdivision-h-gutter, $gutter-right: $subdivision-h-gutter) {
+@mixin column($fraction: 1, $offset: 0, $gutter-left: $subdivision-h-gutter, $gutter-right: $subdivision-h-gutter, $center: false) {
   $gutter-width: ($gutter-left + $gutter-right) - $subdivision-h-gutter;
   
   flex-basis: calc(#{percentage($fraction)} - #{$gutter-width});
@@ -20,43 +32,51 @@ $subdivision-column-selector: "*" !default;
   margin-right: $gutter-right - $subdivision-h-gutter;
   margin-left: $gutter-left;
 
-  @include offset($offset, $gutter-left);
-}
-
-@mixin span($fraction: 1, $offset: 0) {
-  flex-basis: calc(#{percentage($fraction)});
-  max-width: calc(#{percentage($fraction)});
-  
-  @include offset($offset);
+  @if $center {
+    margin-left: getOffset((1 - $fraction) / 2);
+    margin-right: getOffset((1 - $fraction) / 2, 0px);
+  } @else {
+    @include offset($offset, $gutter-left);
+  }
 }
 
 @mixin offset($offset: 0, $gutter: $subdivision-h-gutter) {
   @if $offset != 0 {
-    @if type-of($offset) == "number" {
-      @if unitless($offset) {
-        margin-left: calc(#{percentage($offset)} + #{$gutter});
-      } @else {
-        margin-left: calc(#{$offset} + #{$gutter});
-      }
-    } @else if type-of($offset) == "string" {
-      margin-left: $offset;
-    }
+    margin-left: getOffset($offset, $gutter);
   }
 }
 
+@mixin full-bleed() {
+  flex-basis: 100%;
+  max-width: auto;
+  margin-left: -$subdivision-h-gutter;
+  margin-right: -$subdivision-h-gutter;
+}
+
 @mixin stack() {
-  flex-basis: calc(100% - #{$subdivision-h-gutter});
-  max-width: calc(100% - #{$subdivision-h-gutter});
-  margin-left: $subdivision-h-gutter; // Return to default offset
+  flex-basis: 100%;
+  max-width: 100%;
+
+  margin-left: $subdivision-h-gutter;
 }
 
-@mixin center($fraction) {
-  max-width: calc((100% - #{$subdivision-h-gutter}) * #{$fraction} - #{$subdivision-h-gutter});
-  margin: 0 auto;
+@mixin rows() {
+  display: block;
+  box-sizing: border-box;
+
+  margin-left: -$subdivision-h-gutter;
+  margin-right: -$subdivision-h-gutter;
+  padding-right: $subdivision-h-gutter;
+
+  > #{$subdivision-column-selector} {
+    box-sizing: border-box;
+    
+    margin-left: $subdivision-h-gutter;
+    margin-bottom: $subdivision-v-gutter;
+  }
 }
 
-/* Classes */
-#{$subdivision-container-selector} {
+@mixin columns() {
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
@@ -76,4 +96,19 @@ $subdivision-column-selector: "*" !default;
       margin-bottom: -$subdivision-v-gutter;
     }
   }
+}
+
+@mixin center($fraction) {
+  width: calc((100% - #{$subdivision-h-gutter}) * #{$fraction} - #{$subdivision-h-gutter});
+  margin: 0 auto;
+}
+
+@mixin uncenter() {
+  max-width: none;
+  margin: 0;
+}
+
+/* Classes */
+#{$subdivision-container-selector} {
+  @include columns();
 }
