@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { StyledComponentClass } from 'styled-components'
 
 interface SubdivisionOptions {
   gutter?: number
@@ -22,22 +22,25 @@ export default class Subdivision {
   containerSelector: string
   columnSelector: string
 
+  Grid: StyledComponentClass<any, any, any>
+
   get gutter(): number {
     return this.gutterH
   }
 
   constructor(options: SubdivisionOptions = {}) {
-    const { gutter } = options
-    delete options.gutter
-
-    if (typeof options.gutterH !== 'number') {
-      options.gutterH = gutter
-    }
-    if (typeof options.gutterV !== 'number') {
-      options.gutterV = options.gutterH
+    // is global gutter given?
+    if (options.gutter) {
+      options.gutterH = options.gutter
+      options.gutterV = options.gutter
+      delete options.gutter
     }
 
     Object.assign(this, defaults, options)
+
+    this.Grid = styled.div.attrs({ className: this.containerSelector.substring(1) })`
+      ${this.columns()}
+    `
   }
 
   inject() {
@@ -147,20 +150,12 @@ export default class Subdivision {
         margin-left: ${this.gutterH}px;
         margin-bottom: ${this.gutterV}px;
     
-        > ${this.containerSelector}, ${this.Grid} {
+        > ${this.containerSelector} {
           margin-bottom: -${this.gutterV}px;
         }
       }
     `
   }
-
-  Grid = styled.div`
-    ${this.columns()}
-  `
-
-  Centered = styled.div`
-    ${(props: { fraction: number }) => this.center(props.fraction)}
-  `
 
   private getOffset(offset: number, gutter: number = this.gutterH): string {
     return `calc(${percentage(offset)} + ${gutter}px);`
