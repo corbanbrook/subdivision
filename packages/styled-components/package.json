@@ -21,5 +21,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "styled-components": "^3.4.9"
+  }
 }
