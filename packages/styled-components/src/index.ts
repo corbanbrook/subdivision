@@ -43,14 +43,6 @@ export default class Subdivision {
     `
   }
 
-  inject() {
-    return `
-      ${this.containerSelector} {
-        ${this.columns()}
-      }
-    `
-  }
-
   column = (
     fraction: number = 1,
     offset: number = 0,
@@ -78,11 +70,11 @@ export default class Subdivision {
     `
   }
 
-  offset(offset: number = 0, gutter: number = this.gutterH): string {
+  offset = (offset: number = 0, gutter: number = this.gutterH): string => {
     return offset !== 0 ? `margin-left: ${this.getOffset(offset, gutter)};` : ''
   }
 
-  stack(): string {
+  stack = (): string => {
     return `
       flex-basis: 100%;
       max-width: 100%;
@@ -90,7 +82,7 @@ export default class Subdivision {
     `
   }
 
-  fullBleed(): string {
+  fullBleed = (): string => {
     return `
       flex-basis: 100%;
       max-width: auto;
@@ -99,7 +91,7 @@ export default class Subdivision {
     `
   }
 
-  center(fraction: number): string {
+  center = (fraction: number): string => {
     return `
       max-width: calc((100% - ${this.gutterH}px) * ${fraction} - ${
       this.gutterH
@@ -108,14 +100,14 @@ export default class Subdivision {
     `
   }
 
-  uncenter(): string {
+  uncenter = (): string => {
     return `
       max-width: none;
       margin: 0;
     `
   }
 
-  rows(): string {
+  rows = (): string => {
     return `
       display: block;
       box-sizing: border-box;
@@ -133,7 +125,7 @@ export default class Subdivision {
     `
   }
 
-  columns(): string {
+  columns = (): string => {
     return `
       display: flex;
       flex-wrap: wrap;
