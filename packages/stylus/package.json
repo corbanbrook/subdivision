@@ -1,24 +1,24 @@
 {
-  "name": "subdivision-stylus",
+  "name": "@subdivision/stylus",
+  "description": "A flex box and calc based grid system",
+  "author": "Corban Riley",
   "version": "0.1.5",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/corbanbrook/subdivision.git"
   },
-  "files": [
-    "src"
-  ],
-  "main": "index.js",
-  "author": "Corban Riley",
-  "devDependencies": {
-  },
   "bugs": {
     "url": "https://github.com/corbanbrook/subdivision/issues"
   },
   "homepage": "https://github.com/corbanbrook/subdivision#readme",
+  "files": [
+    "src"
+  ],
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "description": ""
+  "devDependencies": {
+  }
 }

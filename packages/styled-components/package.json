@@ -1,6 +1,6 @@
 {
-  "name": "subdivision-styled-components",
-  "description": "A Flex and calc based grid system",
+  "name": "@subdivision/styled-components",
+  "description": "A flex box and calc based grid system",
   "author": "Corban Riley",
   "version": "0.1.4",
   "license": "MIT",
@@ -8,15 +8,15 @@
     "type": "git",
     "url": "git+ssh://git@github.com/corbanbrook/subdivision.git"
   },
+  "bugs": {
+    "url": "https://github.com/corbanbrook/subdivision/issues"
+  },
+  "homepage": "https://github.com/corbanbrook/subdivision#readme",
   "files": [
     "src"
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "bugs": {
-    "url": "https://github.com/corbanbrook/subdivision/issues"
-  },
-  "homepage": "https://github.com/corbanbrook/subdivision#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
