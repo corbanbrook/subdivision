@@ -9,5 +9,7 @@ Live demo playground (codepen)
 - stylus (coming soon)
 
 
-npm install @subdivision/styled-components
+npm install subdivision-sass
+npm install subdivision-stylus
+npm install subdivision-styled-components
 
