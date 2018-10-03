@@ -12,7 +12,6 @@
   "main": "index.js",
   "author": "Corban Riley",
   "devDependencies": {
-    "node-sass": "^4.7.2"
   },
   "bugs": {
     "url": "https://github.com/corbanbrook/subdivision/issues"

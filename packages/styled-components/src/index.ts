@@ -2,14 +2,15 @@ import styled, { StyledComponentClass } from 'styled-components'
 
 interface SubdivisionOptions {
   gutter?: number
-  gutterH?: number
-  gutterV?: number
-  containerSelector?: string
-  columnSelector?: string
+  gutterH: number
+  gutterV: number
+  containerSelector: string
+  columnSelector: string
 }
 
 const defaults: SubdivisionOptions = {
-  gutter: 10,
+  gutterH: 10,
+  gutterV: 10,
   containerSelector: '.grid',
   columnSelector: '*'
 }
@@ -17,10 +18,10 @@ const defaults: SubdivisionOptions = {
 const percentage = (d: number) => `${(d * 100).toFixed()}%`
 
 export default class Subdivision {
-  gutterH: number
-  gutterV: number
-  containerSelector: string
-  columnSelector: string
+  gutterH: number = defaults.gutterH
+  gutterV: number = defaults.gutterV
+  containerSelector: string = defaults.containerSelector
+  columnSelector: string = defaults.columnSelector
 
   Grid: StyledComponentClass<any, any, any>
 
@@ -28,7 +29,7 @@ export default class Subdivision {
     return this.gutterH
   }
 
-  constructor(options: SubdivisionOptions = {}) {
+  constructor(options: Partial<SubdivisionOptions> = {}) {
     // is global gutter given?
     if (options.gutter) {
       options.gutterH = options.gutter
@@ -36,7 +37,7 @@ export default class Subdivision {
       delete options.gutter
     }
 
-    Object.assign(this, defaults, options)
+    Object.assign(this, options)
 
     this.Grid = styled.div.attrs({ className: this.containerSelector.substring(1) })`
       ${this.columns()}
