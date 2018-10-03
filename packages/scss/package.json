@@ -1,5 +1,5 @@
 {
-  "name": "@subdivision/scss",
+  "name": "subdivision/scss",
   "description": "A flexbox and calc grid system",
   "author": "Corban Riley",
   "version": "0.2.0",
