@@ -2,7 +2,7 @@
   "name": "subdivision-sass",
   "description": "A flexbox and calc grid system",
   "author": "Corban Riley",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "repository": {
     "type": "git",
