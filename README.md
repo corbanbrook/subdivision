@@ -8,3 +8,6 @@ Live demo playground (codepen)
 - [styled-components](https://codepen.io/anon/pen/bmEGMM)
 - stylus (coming soon)
 
+
+npm install @subdivision/styled-components
+
