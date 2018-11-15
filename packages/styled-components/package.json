@@ -2,7 +2,7 @@
   "name": "subdivision-styled-components",
   "description": "A flex box and calc based grid system",
   "author": "Corban Riley",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "license": "MIT",
   "repository": {
     "type": "git",
