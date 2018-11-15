@@ -1,4 +1,4 @@
-import { StyledComponentClass } from 'styled-components';
+import { StyledComponent } from 'styled-components';
 interface SubdivisionOptions {
     gutter?: number;
     gutterH: number;
@@ -11,7 +11,7 @@ export default class Subdivision {
     gutterV: number;
     containerSelector: string;
     columnSelector: string;
-    Grid: StyledComponentClass<any, any, any>;
+    Grid: StyledComponent<any, any, any, any>;
     readonly gutter: number;
     constructor(options?: Partial<SubdivisionOptions>);
     column: (fraction?: number, offset?: number, gutterLeft?: number, gutterRight?: number, center?: boolean) => string;
