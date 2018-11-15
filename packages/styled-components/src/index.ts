@@ -1,4 +1,4 @@
-import styled, { StyledComponentClass } from 'styled-components'
+import styled, { StyledComponent } from 'styled-components'
 
 interface SubdivisionOptions {
   gutter?: number
@@ -23,7 +23,7 @@ export default class Subdivision {
   containerSelector: string = defaults.containerSelector
   columnSelector: string = defaults.columnSelector
 
-  Grid: StyledComponentClass<any, any, any>
+  Grid: StyledComponent<any, any, any, any>
 
   get gutter(): number {
     return this.gutterH
